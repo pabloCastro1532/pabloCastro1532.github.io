@@ -8,6 +8,8 @@ Astro Academia is a personal academic website built using Astro, a modern static
 If you find Astro Academia useful or appreciate my work, consider supporting me! Your support helps keep this project maintained and encourages further development. 🚀✨
 
 
+If you find Astro Academia useful or appreciate my work, consider supporting me! Your support helps keep this project maintained and encourages further development. 🚀✨
+
 <a href="https://buymeacoffee.com/maiobarbero" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 ## How to use it
