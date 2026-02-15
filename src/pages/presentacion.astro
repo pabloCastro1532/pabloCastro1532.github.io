@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { Image } from 'astro:assets'
+import { profile } from '@/settings'
+import ProfilePictures from '@/assets/profile_pictures.jpg'
+---
+
+<Layout title="Presentación | Juan Pablo Moreno">
+	<section class="max-w-4xl mx-auto">
+		<!-- Header -->
+		<div class="text-center mb-12">
+			<h1 class="text-4xl font-extrabold mb-2">
+				<span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+					Presentación
+				</span>
+			</h1>
+			<div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+		</div>
+
+		<!-- Profile Card -->
+		<div class="card bg-base-200 shadow-xl mb-10 overflow-hidden">
+			<div class="card-body items-center text-center p-8">
+				<div class="avatar mb-6">
+					<div class="w-40 rounded-full ring ring-primary ring-offset-base-100 ring-offset-4 shadow-lg">
+						<Image
+							src={ProfilePictures}
+							alt={`Foto de ${profile.fullName}`}
+							class="w-full h-full object-cover"
+						/>
+					</div>
+				</div>
+				<h2 class="card-title text-3xl font-bold">{profile.fullName}</h2>
+				<p class="text-lg opacity-80">{profile.title}</p>
+				<div class="badge badge-primary badge-lg mt-2 gap-2">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
+					</svg>
+					{profile.institute}
+				</div>
+				<p class="mt-4 text-base max-w-lg opacity-70">
+					Bases de Datos 2 · Semestre 2026-1
+				</p>
+			</div>
+		</div>
+
+		<!-- Video Section -->
+		<div class="card bg-base-200 shadow-xl overflow-hidden">
+			<div class="card-body p-8">
+				<h2 class="card-title text-2xl font-bold mb-6 flex items-center gap-3">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-primary">
+						<path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" />
+					</svg>
+					Video de Presentación
+				</h2>
+				<div class="aspect-video w-full rounded-xl overflow-hidden bg-base-300 shadow-inner">
+					<!-- 
+						INSTRUCCIONES PARA CAMBIAR EL VIDEO:
+						1. Sube tu video a YouTube
+						2. Copia el ID del video (la parte después de v= en la URL)
+						3. Reemplaza "dQw4w9WgXcQ" por tu ID de video
+						Ejemplo: Si tu URL es https://www.youtube.com/watch?v=ABC123
+						         Entonces pon "ABC123" en lugar de "dQw4w9WgXcQ"
+					-->
+					<iframe
+						class="w-full h-full"
+						src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+						title="Video de Presentación - Juan Pablo Moreno"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen
+					></iframe>
+				</div>
+				<div class="alert alert-info mt-4 shadow-sm">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+					</svg>
+					<span>Video de presentación (90–120 segundos) para la asignatura Bases de Datos 2.</span>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.aspect-video {
+		aspect-ratio: 16 / 9;
+	}
+</style>
