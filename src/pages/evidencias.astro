@@ -19,23 +19,84 @@ import Layout from '../layouts/Layout.astro'
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 			
 			<!-- SQL -->
-			<div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-base-300">
-				<div class="card-body items-center text-center p-8">
-					<div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
-						</svg>
-					</div>
-					<h2 class="card-title text-2xl font-bold">SQL</h2>
-					<div class="divider my-2"></div>
-					<div class="flex flex-col items-center gap-3 py-4">
-						<div class="badge badge-outline badge-lg gap-2">
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+			<div class="card md:col-span-2 bg-base-200 shadow-xl hover:shadow-2xl transition-all duration-300 border border-base-300">
+				<div class="card-body p-8">
+					<div class="flex items-center gap-4 mb-6">
+						<div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
 							</svg>
-							Próximamente
 						</div>
-						<p class="text-sm opacity-60">Consultas, joins, subconsultas y más</p>
+						<h2 class="card-title text-3xl font-bold">SQL</h2>
+					</div>
+
+					<div class="space-y-8">
+						<!-- Ejemplo 1 -->
+						<div class="bg-base-100 rounded-xl p-6 border border-base-300">
+							<h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+								<span class="badge badge-primary">1</span> Empleados con múltiples cargos
+							</h3>
+							<p class="text-base opacity-80 mb-4">
+								Para este caso, necesitaba saber qué empleados han hecho carrera interna, pasando por diferentes puestos. La consulta cuenta su historial de cargos y me filtra solo a los que han tenido más de un rol en la compañía.
+							</p>
+							<div class="mockup-code bg-[#1a1b26] text-white overflow-x-auto">
+								<pre class="px-5 py-4"><code>SELECT   
+    e.EMPLOYEE_ID AS ID,  
+    e.FIRST_NAME || ' ' || e.LAST_NAME AS NOMBRE_COMPLETO,  
+    COUNT(hc.JOB_ID) AS NUMERO_CARGOS  
+FROM hr.EMPLOYEES e  
+LEFT JOIN hr.JOB_HISTORY hc   
+    ON e.EMPLOYEE_ID = hc.EMPLOYEE_ID  
+GROUP BY e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME  
+HAVING COUNT(hc.JOB_ID) > 1 
+ORDER BY e.EMPLOYEE_ID;</code></pre>
+							</div>
+						</div>
+
+						<!-- Ejemplo 2 -->
+						<div class="bg-base-100 rounded-xl p-6 border border-base-300">
+							<h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+								<span class="badge badge-primary">2</span> Salarios en Europa
+							</h3>
+							<p class="text-base opacity-80 mb-4">
+								Aquí el objetivo era filtrar al personal de Europa con un salario específico (entre 4 y 6 mil). Tuve que conectar varias tablas desde Empleados hasta Regiones para poder filtrar por ubicación geográfica y rango de sueldo simultáneamente.
+							</p>
+							<div class="mockup-code bg-[#1a1b26] text-white overflow-x-auto">
+								<pre class="px-5 py-4"><code>SELECT 
+    CONCAT(E.FIRST_NAME, ' ', E.LAST_NAME) AS NAME, 
+    C.COUNTRY_NAME AS COUNTRY, 
+    E.SALARY
+FROM HR.EMPLOYEES E 
+JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+JOIN HR.LOCATIONS L ON L.LOCATION_ID = D.LOCATION_ID
+JOIN HR.COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID
+JOIN HR.REGIONS R ON C.REGION_ID = R.REGION_ID
+WHERE R.REGION_ID = 10 
+AND E.SALARY BETWEEN 4000 AND 6000;</code></pre>
+							</div>
+						</div>
+
+						<!-- Ejemplo 3 -->
+						<div class="bg-base-100 rounded-xl p-6 border border-base-300">
+							<h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+								<span class="badge badge-primary">3</span> Jerarquía y Enmascaramiento
+							</h3>
+							<p class="text-base opacity-80 mb-4">
+								Esta consulta ayuda a visualizar la cadena de mando, mostrando empleado y jefe lado a lado. De paso, practiqué manipulación de strings ocultando parcialmente los correos para que solo se vean las primeras letras.
+							</p>
+							<div class="mockup-code bg-[#1a1b26] text-white overflow-x-auto">
+								<pre class="px-5 py-4"><code>SELECT
+    E.FIRST_NAME || ' ' || E.LAST_NAME AS EMPLEADO,
+    LPAD(SUBSTR(E.EMAIL, 1, 3), 9, '*') AS EMAIL_EMPLEADO,
+ 
+    M.FIRST_NAME || ' ' || M.LAST_NAME AS JEFE,
+    LPAD(SUBSTR(M.EMAIL, 1, 3), 9, '*') AS EMAIL_JEFE
+ 
+FROM HR.EMPLOYEES E
+LEFT JOIN HR.EMPLOYEES M ON E.MANAGER_ID = M.EMPLOYEE_ID
+ORDER BY E.LAST_NAME;</code></pre>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
