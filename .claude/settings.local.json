@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"D:\\\\github\\\\pabloCastro1532.github.io\" -Recurse -Force)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(npm run *)",
+      "Bash(Select-String -Path \"dist\\\\evidencias\\\\index.html\" -Pattern \"EvidenciasViewer|client:load|ev-root|ev-stats\")",
+      "Bash(Select-Object -First 20)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(netstat -ano)",
+      "Bash(findstr :4321)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(findstr LISTENING)",
+      "Bash(taskkill /PID 27592 /F)",
+      "Bash(taskkill /PID 25088 /F)",
+      "Bash(Start-Sleep -Seconds 2)",
+      "PowerShell(Stop-Process -Id 27592 -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Id 25088 -Force -ErrorAction SilentlyContinue)",
+      "PowerShell($pids = \\(netstat -ano | Select-String \":4321\" | ForEach-Object { \\($_ -split '\\\\s+'\\)[-1] } | Sort-Object -Unique\\); foreach \\($pid in $pids\\) { try { Stop-Process -Id $pid -Force -ErrorAction Stop; Write-Output \"Killed $pid\" } catch { Write-Output \"Could not kill $pid\" } }; Start-Sleep -Seconds 3; netstat -ano | Select-String \":4321\")"
+    ]
+  }
+}

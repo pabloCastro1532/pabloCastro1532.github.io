@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro'
+import EvidenciasViewer from '../components/EvidenciasViewer'
+---
+
+<Layout title="Evidencias">
+	<div class="ev-page">
+		<header class="ev-page-header">
+			<h1 class="ev-page-title">
+				<span class="ev-title-gradient">Evidencias</span>
+			</h1>
+			<p class="ev-page-subtitle">
+				Ejercicios de SQL, PL/SQL y MongoDB — Bases de Datos 2 · 2026-1
+			</p>
+		</header>
+		<EvidenciasViewer client:load />
+	</div>
+</Layout>
+
+<style>
+	.ev-page {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		width: 100%;
+	}
+
+	.ev-page-header {
+		display: flex;
+		flex-direction: column;
+		gap: 0.375rem;
+	}
+
+	.ev-page-title {
+		font-size: 2rem;
+		font-weight: 800;
+		margin: 0;
+		line-height: 1.1;
+	}
+
+	.ev-title-gradient {
+		background: linear-gradient(135deg, oklch(var(--p)), oklch(var(--s)));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.ev-page-subtitle {
+		font-size: 0.9rem;
+		opacity: 0.55;
+		margin: 0;
+	}
+</style>
