@@ -17,7 +17,11 @@
       "Bash(Start-Sleep -Seconds 2)",
       "PowerShell(Stop-Process -Id 27592 -Force -ErrorAction SilentlyContinue)",
       "PowerShell(Stop-Process -Id 25088 -Force -ErrorAction SilentlyContinue)",
-      "PowerShell($pids = \\(netstat -ano | Select-String \":4321\" | ForEach-Object { \\($_ -split '\\\\s+'\\)[-1] } | Sort-Object -Unique\\); foreach \\($pid in $pids\\) { try { Stop-Process -Id $pid -Force -ErrorAction Stop; Write-Output \"Killed $pid\" } catch { Write-Output \"Could not kill $pid\" } }; Start-Sleep -Seconds 3; netstat -ano | Select-String \":4321\")"
+      "PowerShell($pids = \\(netstat -ano | Select-String \":4321\" | ForEach-Object { \\($_ -split '\\\\s+'\\)[-1] } | Sort-Object -Unique\\); foreach \\($pid in $pids\\) { try { Stop-Process -Id $pid -Force -ErrorAction Stop; Write-Output \"Killed $pid\" } catch { Write-Output \"Could not kill $pid\" } }; Start-Sleep -Seconds 3; netstat -ano | Select-String \":4321\")",
+      "Bash(git config *)",
+      "Bash(powershell -Command \"Expand-Archive -Path 'C:\\\\Users\\\\Damian\\\\Downloads\\\\Taller Mongo.zip' -DestinationPath 'C:\\\\Users\\\\Damian\\\\Downloads\\\\TallerMongo_extracted' -Force; Get-ChildItem 'C:\\\\Users\\\\Damian\\\\Downloads\\\\TallerMongo_extracted' -Recurse | Select-Object FullName\")",
+      "Bash(for i *)",
+      "WebFetch(domain:github.com)"
     ]
   }
 }
